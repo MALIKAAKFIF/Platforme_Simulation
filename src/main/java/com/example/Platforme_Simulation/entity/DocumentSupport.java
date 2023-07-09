@@ -40,6 +40,10 @@ private  Long idDemande;
 
     // Constructeurs, getters et setters
 
+    public Long getDocumentId() {
+        return documentId;
+    }
+
     public DocumentSupport() {
     }
 

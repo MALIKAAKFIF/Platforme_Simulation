@@ -122,6 +122,7 @@ private SimpMessagingTemplate messagingTemplate;
                 DetailsCredit detailsCredit = adminService.getDetailsCreditByDemandeCreditId(demandeId);
                 demandeCredit.setDetailsCredit(detailsCredit);
 
+
             }
 
             utilisateur.setAdresse(adresse);
@@ -190,14 +191,14 @@ private SimpMessagingTemplate messagingTemplate;
     }
 
 
-    @GetMapping("/dossiers/{id}/statut")
-    public String showStatutDossier(@PathVariable Long id, Model model) {
-        String statut = adminService.getStatutDossier(id);
-        model.addAttribute("statut", statut);
-        model.addAttribute("demandeId", id); // Ajouter la demandeId à l'objet Model
+    //@GetMapping("/dossiers/{id}/statut")
+    //public String showStatutDossier(@PathVariable Long id, Model model) {
+        //String statut = adminService.getStatutDossier(id);
+        //model.addAttribute("statut", statut);
+        //model.addAttribute("demandeId", id); // Ajouter la demandeId à l'objet Model
 
-        return "statutDemande";
-    }
+        //return "statutDemande";
+    //}
 
     @GetMapping("/dossiers/{id}/notifications")
     @ResponseBody

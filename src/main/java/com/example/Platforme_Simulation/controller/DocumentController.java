@@ -34,11 +34,12 @@ public class DocumentController {
 
 
 
-    @GetMapping("/download/{documentId}/{documentType}")
-    public ResponseEntity<UrlResource> downloadDocument(@PathVariable Long documentId,
+    @GetMapping("/download/{demandeId}/{documentType}")
+    public ResponseEntity<UrlResource> downloadDocument(@PathVariable Long demandeId,
                                                         @PathVariable String documentType) {
 
-
+        List<DocumentSupport> documents=documentSupportRepository.findIdDocumentByIdDemande(demandeId);
+        Long documentId= documents.get(0).getDocumentId();
         DocumentSupport documentSupport = documentSupportRepository.findByDocumentId(documentId);
 
         if (documentSupport == null) {
