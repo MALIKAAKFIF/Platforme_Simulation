@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Page de connexion</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .center-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .btn-primary {
+            background-color: #E85418;
+            border-color: #E85418;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: blue;
+            transform: scale(1.1);
+        }
+
+        .btn-primary:active {
+            background-color: blue;
+            transform: scale(0.9);
+        }
+
+        /* Réduire la largeur du formulaire */
+        @media (min-width: 576px) {
+            .col-md-6 {
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnF2jg47kj8rVpfIMA-lL8MKmG0jL2sq9ahng5FFvtqw&s" alt="Logo" width="100">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+
+<div class="container">
+    <div class="row center-form">
+        <div class="col-md-6" style="margin-top: -250px;">
+            <h6 class="text-center">Bonjour et bienvenue sur votre espace admin</h6>
+            <form th:action="@{/adminLogin}" method="post">
+                <div class="form-group">
+                    <label for="matricule">Matricule :</label>
+                    <input type="text" id="matricule" name="matricule" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" value="Se connecter" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="errorMessageModal" tabindex="-1" role="dialog" aria-labelledby="errorMessageModalLabel"
+     aria-hidden="true">
+    <!-- ... contenu de la modal ... -->
+</div>
+
+<script th:if="${showErrorMessage}">
+    $(document).ready(function() {
+        $('#errorMessageModal').modal('show');
+    });
+</script>
+
+</body>
+</html>

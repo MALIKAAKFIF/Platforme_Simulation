@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Page d'enregistrement</title>
+</head>
+<body>
+<h2>Enregistrement administrateur</h2>
+<form action="/adminRegister/save" method="POST" >
+  <label for="matricule">Matricule :</label>
+  <input type="text" id="matricule" name="matricule" required><br><br>
+
+  <label for="password">Mot de passe :</label>
+  <input type="password" id="password" name="password" required><br><br>
+
+  <label for="nom">Nom :</label>
+  <input type="text" id="nom" name="nom" required><br><br>
+
+  <label for="prenom">Prénom :</label>
+  <input type="text" id="prenom" name="prenom" required><br><br>
+
+  <input type="submit" value="S'enregistrer">
+</form>
+</body>
+</html>

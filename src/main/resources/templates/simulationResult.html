@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulation Result</title>
+    <style>
+
+
+        .containere {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 200px auto;
+        }
+
+        #simulationDiv {
+            border: 2px solid #009EE0;
+            padding: 28px;
+            margin-right: 10px;
+            width: 300px;
+        }
+
+        #resultDiv {
+            border: 2px solid #009EE0;
+            padding: 20px;
+            margin-left: 10px;
+            width: 300px;
+        }
+
+        #simulationDiv h3,
+        #resultDiv h3 {
+            text-align: center;
+            color: #009EE0;
+            margin-bottom: 20px;
+        }
+
+        #simulationDiv p,
+        #resultDiv p {
+            margin-bottom: 10px;
+        }
+
+         #resultDiv button {
+            background-color: #E85418;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+        }
+
+        #resultDiv button.edit-button {
+            background-color: #009EE0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #simulationDiv .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        #simulationDiv label {
+            margin-bottom: 5px;
+        }
+
+        #simulationDiv input[type="range"] {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 40px;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #E85412;
+            cursor: pointer;
+        }
+
+        .form-group label {
+            margin-bottom: 10px;
+        }
+
+        .form-group input[type="range"] {
+            margin-top: 10px;
+        }
+
+        .form-group input[type="number"],
+        .form-group select {
+            border: none;
+            outline: none;
+        }
+
+        .form-group select {
+            border: none;
+            outline: none;
+            appearance: none;
+            background: url('https://example.com/arrow-icon.png') no-repeat right center; /* Remplacez l'URL par le chemin de votre icône */
+            padding-right: 20px; /* Ajoute un espace à droite pour l'icône */
+        }
+
+        .btn-primary {
+            display: block;
+            margin: 30px auto 0;
+
+            background-color: #E85412;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        #simulationDiv .form-group {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #simulationDiv .form-group label {
+            margin-right: 5px;
+        }
+
+        #simulationDiv input[type="range"] {
+            width: 70%;
+            margin-left: 5px;
+        }
+
+        /* New styles for range inputs on a new line */
+        #simulationDiv .form-group.range-input {
+            flex-direction: column;
+        }
+
+        #simulationDiv .form-group.range-input input[type="range"] {
+            width: 100%;
+            margin-left: 0;
+            margin-top: 10px;
+        }
+        #simulationDiv input[type="text"] {
+        /* Supprime la bordure */
+        border: none;
+        outline: none;
+    }
+    .zoom-button {
+        transition: transform 0.3s ease;
+    }
+
+    .zoom-button:hover {
+        transform: scale(1.1);
+    }
+    #resultDiv button:hover {
+            background-color:  #0d6efd;
+        }
+         /* Styles for the navbar */
+    .navbar {
+        background-color: #fcfcfc;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .navbar a {
+        color: black;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    .navbar .logo {
+        margin-right: 10px;
+    }
+
+    .navbar .right {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar .right .dropdown {
+        margin-left: 10px;
+        position: relative;
+    }
+
+    .navbar .right .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .navbar .right .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .navbar .right .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+  .navbar .right .dropdown .dropbtn {
+  border: none; /* Supprimer la bordure */
+  background-color: transparent; /* Définir la couleur de fond comme transparent */
+  padding: 0; /* Supprimer le remplissage */
+  cursor: pointer;
+  margin-right: 40px;
+}
+.menu-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col {
+  flex: 1;
+}
+footer {
+  background-color: rgb(33,37,41);
+  color: white;
+}
+
+.menu-footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.menu-footer a:hover {
+  text-decoration: underline;
+}
+.menu-footer ul {
+  list-style: none;
+}
+.menu-footer a,
+.menu-footer h3 {
+  font-size: 14px;
+}
+.logo img {
+  max-width: 100px;
+  height: auto;
+}
+.logo {
+  margin-bottom: 20px;
+}
+
+.menu-footer {
+  margin-top: 20px;
+}
+    </style>
+</head>
+
+<body>
+<div class="navbar">
+    <a href="#" class="logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnF2jg47kj8rVpfIMA-lL8MKmG0jL2sq9ahng5FFvtqw&s" alt="Logo" width="100"></a>
+    <div class="right">
+        <a href="/index">Accueil</a>
+        <a href="https://www.cihbank.ma/particuliers/nos-offres/financer-mes-projets">Nos produits</a>
+        <a href="/contact">Nous contacter</a>
+        <div class="dropdown">
+            <button class="dropbtn navbar" style="border: none; background-color: transparent;">
+                Espace Client <span style="margin-left: 5px;">&#9662;</span>
+            </button>
+            <div class="dropdown-content">
+                <a href="/login">Se connecter</a>
+                <a href="/register">Créer un compte</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="containere" style="margin-top: 45px;">
+    <div id="simulationDiv">
+        <h3  style="font-family: Titillium Web">Simulation effectuée</h3>
+        <div class="form-group">
+            <label for="creditAmountInput">Montant souhaité (en DH) :</label>
+            <input type="text" id="creditAmountInput" th:value="${simulationResult.creditAmount}">
+        </div>
+        <div class="form-group range-input">
+
+            <input id="amountSlider" type="range" min="0" max="100000" value="${simulationResult.creditAmount}" step="1000" onchange="updateInputValue('creditAmountInput', this.value)">
+        </div>
+        <div class="form-group">
+            <label for="durationInput">Durée :</label>
+            <input type="text" id="durationInput" th:value="${simulationResult.duration}">
+        </div>
+        <div class="form-group range-input">
+
+            <input id="durationSlider" type="range" min="0" max="300" value="${simulationResult.duration}" step="3" onchange="updateInputValue('durationInput', this.value)">
+        </div>
+        <div class="form-group">
+            <label for="emploieInput">Je suis :</label>
+            <input type="text" id="emploieInput" th:value="${simulationResult.emploie}">
+        </div>
+
+    </div>
+    <div id="resultDiv">
+        <h3  style="font-family: Titillium Web">Résultat de votre simulation</h3>
+        <p>Montant souhaité (en DH) : <span id="creditAmountSpan" th:text="${simulationResult.creditAmount}"></span></p>
+        <p>Durée : <span id="durationSpan" th:text="${simulationResult.duration}"></span> mois</p>
+        <p>Vous êtes : <span id="emploieSpan" th:text="${simulationResult.emploie}"></span></p>
+        <p>Mensualité (en DH) : <strong><span id="monthlyPaymentSpan" th:text="${simulationResult.monthlyPayment}"></span></strong></p>
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="creditAmount" th:value="${simulationResult.creditAmount}"/>
+            <input type="hidden" name="duration" th:value="${simulationResult.duration}"/>
+            <button class="btn-primary zoom-button" type="submit" formaction="/login" onclick="cacheSimulation()">Je demande mon crédit</button>
+
+        </form>
+    </div>
+</div>
+<footer >
+    <div style="margin-left:70px" class="box-top">
+        <div class="container">
+            <i style="margin-top: 10px;" class="chat" onclick="window.location.href='tel:4747';"></i>
+            <a style="margin-top: 10px;" href="https://www.cihbank.ma/accueil" class="logo">
+                <img style="margin-top: 10px;"src="https://www.cihbank.ma/themes/ciht/images/logo-footer.png" alt="Cih Bank">
+            </a>
+            <div class="menu-footer">
+                <div class="col">
+                    <a href="#" class="title">CIH BANK</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.cihbank.ma/Groupe-CIHBANK">
+                                Groupe CIH BANK
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/espace-financier">
+                                Espace financier
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/actualites">
+                                Actualités
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/etre-contacter">
+                                Contactez-nous
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/communications">
+                                Communications
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://recrutement.cihbank.ma/" target="_blank">
+                                Recrutement
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <a href="#" class="title">Vous êtes ?</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/devenir-client/Offres-Packages">
+                                Particuliers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/Professionnels/devenir-client/Offres-Packages">
+                                Professionnels
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/MDM/devenir-client/Offres-Packages">
+                                MDM
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/entreprise/">
+                                Entreprises
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <a href="#" class="title">Vos besoins</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.e-cihbank.ma/">
+                                Ouvrir un compte
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/nos-offres/financer-mes-projets">
+                                Crédit
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/nos-offres/Bancassurance-et-Assistance">
+                                Assurance
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/nos-offres/Epargner-et-Investir">
+                                Épargne
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <a href="#" class="title">Liens utiles</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.cihnet.co.ma/" target="_blank">
+                                CIH Online
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.code30.ma/" target="_blank">
+                                Code 30
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/devenir-client/code-18">
+                                Code18
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/cartes" target="_blank">
+                                Avantages carte
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>
+                        Télécharger CIH mobile
+                    </h3>
+                    <a href="https://play.google.com/store/apps/details?id=com.b3g.cih.online" ></a>
+                    <a href="https://apps.apple.com/fr/app/cih-mobile/id664637221" ></a>
+                </div>
+            </div>
+            <p style="font-size: 11px;">
+                CIH BANK est assujetti à la loi N° 09-08, relative à la protection des personnes physiques à l'égard du traitement des données personnelles et elle a pris ses dispositions pour en respecter la lettre et l'esprit.
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    var creditAmountInput = document.getElementById("creditAmountInput");
+    var durationInput = document.getElementById("durationInput");
+    var emploieInput = document.getElementById("emploieInput");
+    var monthlyPaymentInput = document.getElementById("monthlyPaymentInput");
+
+    creditAmountInput.addEventListener("input", updateResult);
+    durationInput.addEventListener("input", updateResult);
+    emploieInput.addEventListener("input", updateResult);
+
+    function updateResult() {
+        var creditAmountSpan = document.getElementById("creditAmountSpan");
+        var durationSpan = document.getElementById("durationSpan");
+        var emploieSpan = document.getElementById("emploieSpan");
+        var monthlyPaymentSpan = document.getElementById("monthlyPaymentSpan");
+
+        creditAmountSpan.innerText = creditAmountInput.value;
+        durationSpan.innerText = durationInput.value;
+        emploieSpan.innerText = emploieInput.value;
+
+        var creditAmount = parseInt(creditAmountInput.value);
+        var duration = parseInt(durationInput.value);
+        var monthlyPayment = creditAmount / duration;
+        monthlyPaymentSpan.innerText = monthlyPayment.toFixed(2);
+    }
+
+    function updateInputValue(inputId, value) {
+        var input = document.getElementById(inputId);
+        input.value = value;
+        updateResult();
+    }
+
+    // Function to update the slider background color
+    function updateSliderBackground(sliderId) {
+        var slider = document.getElementById(sliderId);
+        var percent = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+        slider.style.background = "linear-gradient(to right, #009EE0 0%, #009EE0 " + percent + "%, #ddd " + percent + "%, #ddd 100%)";
+    }
+
+    // Update the slider backgrounds initially
+    updateSliderBackground("amountSlider");
+    updateSliderBackground("durationSlider");
+
+    // Attach event listeners to update slider backgrounds
+    var amountSlider = document.getElementById("amountSlider");
+    var durationSlider = document.getElementById("durationSlider");
+
+    amountSlider.addEventListener("input", function() {
+        updateSliderBackground("amountSlider");
+    });
+
+    durationSlider.addEventListener("input", function() {
+        updateSliderBackground("durationSlider");
+    });
+
+    function editSimulation() {
+        window.location.href = "/simulate"; // Redirection vers la page de simulation
+    }
+
+    function cacheSimulation() {
+        var montantDemande = document.getElementById("creditAmountSpan").innerText;
+        var duree = document.getElementById("durationSpan").innerText;
+        var emploi = document.getElementById("emploieSpan").innerText;
+        var mensualite = document.getElementById("monthlyPaymentSpan").innerText;
+        var simulationData = {
+            montantDemande: montantDemande,
+            duree: duree,
+            emploi: emploi,
+            mensualite: mensualite
+        };
+
+        localStorage.setItem("simulationData", JSON.stringify(simulationData));
+    }
+</script>
+
+</body>
+</html>

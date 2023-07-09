@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+    #simule .container {
+        border: 2px solid #009EE0;
+        padding: 20px;
+        margin: 200px auto;
+        max-width: 400px;
+        margin-top: 50px;
+    }
+
+    #simule .form-group {
+        margin-bottom: 40px;
+    }
+
+    #simule input[type="range"] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 5px;
+        border-radius: 5px;
+        background: #ddd;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    #simule input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #E85412;
+        cursor: pointer;
+    }
+
+    #simule .form-group label {
+        margin-bottom: 10px;
+    }
+
+    #simule .form-group input[type="range"] {
+        margin-top: 10px;
+    }
+
+    #simule .form-group input[type="number"],
+    #simule .form-group select {
+        border: none;
+        outline: none;
+    }
+
+    #simule .form-group select {
+     font-family: Titillium Web;
+        border: none;
+        outline: none;
+        appearance: none;
+        background: url('https://example.com/arrow-icon.png') no-repeat right center; /* Remplacez l'URL par le chemin de votre icône */
+        padding-right: 20px; /* Ajoute un espace à droite pour l'icône */
+    }
+
+    #simule .btn-primary {
+        display: block;
+        margin: 30px auto 0;
+
+        background-color: #E85412;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #simule input[type="number"]::-webkit-inner-spin-button,
+    #simule input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    #simule .zoom-button {
+        transition: transform 0.3s ease;
+    }
+
+    #simule .zoom-button:hover {
+        transform: scale(1.1);
+        background-color: #0d6efd;
+    }
+
+    /* Styles for the navbar */
+    .navbar {
+        background-color: #fcfcfc;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .navbar a {
+        color: black;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    .navbar .logo {
+        margin-right: 10px;
+    }
+
+    .navbar .right {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar .right .dropdown {
+        margin-left: 10px;
+        position: relative;
+    }
+
+    .navbar .right .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .navbar .right .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .navbar .right .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+  .navbar .right .dropdown .dropbtn {
+  border: none; /* Supprimer la bordure */
+  background-color: transparent; /* Définir la couleur de fond comme transparent */
+  padding: 0; /* Supprimer le remplissage */
+  cursor: pointer;
+  margin-right: 40px;
+}
+    .navbar .right .dropdown-content select {
+  border: none;
+  outline: none;
+  appearance: none;
+  background: url('arrow-icon.png') no-repeat right center; /* Remplacez l'URL par le chemin de votre icône */
+  padding-right: 20px; /* Ajoute un espace à droite pour l'icône */
+  width: 160px; /* Définir une largeur fixe pour éviter le redimensionnement */
+  box-sizing: border-box; /* Inclure la bordure dans la largeur totale */
+}
+.menu-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col {
+  flex: 1;
+}
+footer {
+  background-color: rgb(33,37,41);
+  color: white;
+}
+
+.menu-footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.menu-footer a:hover {
+  text-decoration: underline;
+}
+.menu-footer ul {
+  list-style: none;
+}
+.menu-footer a,
+.menu-footer h3 {
+  font-size: 14px;
+}
+.logo img {
+  max-width: 100px;
+  height: auto;
+}
+.logo {
+  margin-bottom: 20px;
+}
+
+.menu-footer {
+  margin-top: 60px;
+}
+  </style>
+</head>
+<body>
+<div class="navbar">
+    <a href="#" class="logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnF2jg47kj8rVpfIMA-lL8MKmG0jL2sq9ahng5FFvtqw&s" alt="Logo" width="100"></a>
+    <div class="right">
+        <a href="/index">Accueil</a>
+        <a href="https://www.cihbank.ma/particuliers/nos-offres/financer-mes-projets">Nos produits</a>
+        <a href="/contact">Nous contacter</a>
+        <div class="dropdown">
+            <button class="dropbtn navbar" style="border: none; background-color: transparent;">
+                Espace Client <span style="margin-left: 5px;">&#9662;</span>
+            </button>
+            <div class="dropdown-content">
+                <a href="/login">Se connecter</a>
+                <a href="/register">Créer un compte</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="simule" style="margin-top: 45px;">
+    <h2 style="text-align: center; color: #E85412;font-family: Titillium Web">Je fais la simulation de mon crédit</h2>
+    <div class="container" style="margin-top: 20px;">
+        <form th:action="@{/simulate}" th:object="${simulation}" method="post" onsubmit="submitSimulationForm()">
+            <div class="form-group">
+                <label for="creditAmount" style="font-family: Titillium Web">Montant souhaité (en DH) :</label>
+                <input type="number" class="form-control" id="creditAmount" th:field="*{creditAmount}" required>
+                <input type="range" id="amountSlider" min="0" max="100000" step="1000" oninput="updateAmount(this.value)">
+            </div>
+            <div class="form-group">
+                <label for="duration"  style="font-family: Titillium Web">Durée de crédit (en mois) :</label>
+                <input type="number" class="form-control" id="duration" th:field="*{duration}" required>
+                <input type="range" id="durationSlider" min="0" max="300" step="3" oninput="updateDuration(this.value)">
+            </div>
+            <div>
+                <label for="emploie"  style="font-family: Titillium Web">Je suis :</label>
+                <select class="form-control" id="emploie" th:field="*{emploie}" required style="border-color: #E85412; padding: 6px;">
+                    <option value="Fonctionnaire">Fonctionnaire</option>
+                    <option value="Retraites">Retraités</option>
+                    <option value="Salaries">Salariés</option>
+                    <option value="GE">Grande entreprise</option>
+                    <option value="Professionnels">Professionnels</option>
+                    <option value="Autres professions">Autres professions</option>
+                </select>
+            </div>
+            <!-- Add fields for professional information -->
+            <button type="submit" class="btn btn-primary zoom-button">Je calcule</button>
+        </form>
+    </div>
+</div>
+<footer >
+    <div style="margin-left:70px" class="box-top">
+        <div class="container">
+            <i style="margin-top: 10px;" class="chat" onclick="window.location.href='tel:4747';"></i>
+            <a style="margin-top: 10px;" href="https://www.cihbank.ma/accueil" class="logo">
+                <img style="margin-top: 10px;"src="https://www.cihbank.ma/themes/ciht/images/logo-footer.png" alt="Cih Bank">
+            </a>
+            <div class="menu-footer">
+                <div class="col">
+                    <a href="#" class="title">CIH BANK</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.cihbank.ma/Groupe-CIHBANK">
+                                Groupe CIH BANK
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/espace-financier">
+                                Espace financier
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/actualites">
+                                Actualités
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/etre-contacter">
+                                Contactez-nous
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/communications">
+                                Communications
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://recrutement.cihbank.ma/" target="_blank">
+                                Recrutement
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <a href="#" class="title">Vous êtes ?</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/devenir-client/Offres-Packages">
+                                Particuliers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/Professionnels/devenir-client/Offres-Packages">
+                                Professionnels
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/MDM/devenir-client/Offres-Packages">
+                                MDM
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/entreprise/">
+                                Entreprises
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <a href="#" class="title">Vos besoins</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.e-cihbank.ma/">
+                                Ouvrir un compte
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/nos-offres/financer-mes-projets">
+                                Crédit
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/nos-offres/Bancassurance-et-Assistance">
+                                Assurance
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/nos-offres/Epargner-et-Investir">
+                                Épargne
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <a href="#" class="title">Liens utiles</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.cihnet.co.ma/" target="_blank">
+                                CIH Online
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.code30.ma/" target="_blank">
+                                Code 30
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/devenir-client/code-18">
+                                Code18
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/cartes" target="_blank">
+                                Avantages carte
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>
+                        Télécharger CIH mobile
+                    </h3>
+                    <a href="https://play.google.com/store/apps/details?id=com.b3g.cih.online" ></a>
+                    <a href="https://apps.apple.com/fr/app/cih-mobile/id664637221" ></a>
+                </div>
+            </div>
+            <p style="font-size: 11px;">
+                CIH BANK est assujetti à la loi N° 09-08, relative à la protection des personnes physiques à l'égard du traitement des données personnelles et elle a pris ses dispositions pour en respecter la lettre et l'esprit.
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+    function updateAmount(value) {
+        document.getElementById("creditAmount").value = value;
+        var slider = document.getElementById("amountSlider");
+        var percent = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+        slider.style.background = "linear-gradient(to right, #E85412 0%, #E85412 " + percent + "%, #ddd " + percent + "%, #ddd 100%)";
+    }
+
+    function updateDuration(value) {
+        document.getElementById("duration").value = value;
+        var slider = document.getElementById("durationSlider");
+        var percent = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+        slider.style.background = "linear-gradient(to right, #E85412 0%, #E85412 " + percent + "%, #ddd " + percent + "%, #ddd 100%)";
+    }
+
+    document.getElementById("creditAmount").value = document.getElementById("amountSlider").value;
+    document.getElementById("duration").value = document.getElementById("durationSlider").value;
+
+    document.getElementById("amountSlider").addEventListener("input", function () {
+        document.getElementById("creditAmount").value = this.value;
+        var percent = (this.value - this.min) / (this.max - this.min) * 100;
+        this.style.background = "linear-gradient(to right, #009EE0 0%, #009EE0 " + percent + "%, #ddd " + percent + "%, #ddd 100%)";
+    });
+
+    document.getElementById("durationSlider").addEventListener("input", function () {
+        document.getElementById("duration").value = this.value;
+        var percent = (this.value - this.min) / (this.max - this.min) * 100;
+        this.style.background = "linear-gradient(to right, #009EE0 0%,#009EE0 " + percent + "%, #ddd " + percent + "%, #ddd 100%)";
+    });
+
+    // Set the initial values and styles of the sliders
+    var amountSlider = document.getElementById("amountSlider");
+    var durationSlider = document.getElementById("durationSlider");
+
+    amountSlider.value = amountSlider.min;
+    durationSlider.value = durationSlider.min;
+
+    updateAmount(amountSlider.value);
+    updateDuration(durationSlider.value);
+</script>
+
+
+</body>
+</html>

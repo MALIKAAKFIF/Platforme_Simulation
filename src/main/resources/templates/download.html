@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Téléchargement de documents</title>
+</head>
+<body>
+<h1>Téléchargement de documents</h1>
+
+<form action="/documents-support/download" method="GET">
+  <label for="documentId">ID du document:</label>
+  <input type="number" id="documentId" name="documentId">
+
+  <label for="documentType">Type de document:</label>
+  <select id="documentType" name="documentType">
+    <option value="attestation-salaire">Attestation de salaire</option>
+    <option value="bulletin-paie">Bulletin de paie</option>
+  </select>
+
+  <button type="submit">Télécharger</button>
+</form>
+</body>
+</html>

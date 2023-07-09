@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <link href="style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .success-message {
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.zoom-button {
+        transition: transform 0.3s ease;
+    }
+     .zoom-button {
+        background-color: #E85418;
+        border: none;
+        color: white;
+        transition: background-color 0.3s ease;
+    }
+
+    .zoom-button:hover {
+        background-color: #0d6efd;
+    }
+    .show-password-button {
+        background-color: transparent;
+
+        cursor: pointer;
+        outline: none;
+    }
+
+    .show-password-button svg {
+        width: 16px;
+        height: 16px;
+        fill: #000000;
+    }
+    .menu-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col {
+  flex: 1;
+}
+footer {
+  background-color: rgb(33,37,41);
+  color: white;
+    margin-top:200px;
+}
+
+.menu-footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.menu-footer a:hover {
+  text-decoration: underline;
+}
+.menu-footer ul {
+  list-style: none;
+}
+.menu-footer a,
+.menu-footer h3 {
+  font-size: 14px;
+}
+.logo img {
+  max-width: 100px;
+  height: auto;
+}
+.logo {
+  margin-bottom: 20px;
+}
+
+.menu-footer {
+  margin-top: 20px;
+}
+
+    </style>
+</head>
+
+<body>
+<nav class="container navbar navbar-expand-lg navbar-light bg-beige">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnF2jg47kj8rVpfIMA-lL8MKmG0jL2sq9ahng5FFvtqw&s" alt="Logo"style="width: 130px; height: 80px;width=100"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active navbar-text" aria-current="page" th:href="@{/index}">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="https://www.cihbank.ma/particuliers/nos-offres/financer-mes-projets">Nos produits</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active navbar-text" aria-current="page" th:href="@{/contact}">Nous contacter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active navbar-text" aria-current="page" th:href="@{/login}">Se connecter</a>
+                </li>
+
+
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div style="font-weight:  100px;font-size: 22px;
+ ;color: #000000;with:100px">Bonjour et bienvenue sur notre plateforme en ligne ! Nous
+            sommes ravis de vous compter parmi nos utilisateurs </div>
+        <br />
+        <br />
+        <br>
+        <br>
+
+        <div class="card">
+            <div th:if="${param.success}">
+                <div class="alert alert-info success-message"
+                     style="color: white; font-weight: bold ;background-color: #009EE0;">
+                    Félicitations ! Votre inscription a été effectuée avec succès.
+                </div>
+                <div class="form-group mb-3">
+                    <div class="form-group mb-3 text-center">
+                        <button class="btn btn-primary" type="submit" style="background-color: #E85418; border: none;"><span><a style="text-decoration: none" href="/" th:href="@{/login}">Se connecter</a></span></button>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="card-body">
+                <form method="post" role="form" th:action="@{/register/save}" th:object="${utilisateur}">
+
+
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Prénom</label>
+                        <input class="form-control"
+                               id="firstName"
+                               name="firstName"
+                               placeholder="Entrer le prénom"
+                               th:field="*{prenom}"
+                               type="text"
+                        />
+                        <p th:errors="*{prenom}" class="text-danger"
+                           th:if="${#fields.hasErrors('prenom')}">
+                        </p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Nom</label>
+                        <input class="form-control"
+                               id="lastName"
+                               name="lastName"
+                               placeholder="Entrer le nom"
+                               th:field="*{nom}"
+                               type="text"
+                        />
+                        <p th:errors="*{nom}" class="text-danger"
+                           th:if="${#fields.hasErrors('nom')}">
+                        </p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Email</label>
+                        <input class="form-control"
+                               id="email"
+                               name="email"
+                               placeholder="Entrer l'adresse e-mail"
+                               th:field="*{email}"
+                               type="email"
+                        />
+                        <p th:errors="*{email}" class="text-danger"
+                           th:if="${#fields.hasErrors('email')}">
+                        </p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Mot de passe</label>
+                        <div class="input-group">
+                            <input class="form-control" id="password" name="password" placeholder="Entrer le mot de passe" th:field="*{motDePasse}" type="password"/>
+                            <button  class="btn btn-outline-secondary show-password-button" type="button" id="showPasswordButton" onclick="togglePasswordVisibility()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 12c-2.756 0-5-2.686-5-6s2.244-6 5-6s5 2.686 5 6s-2.244 6-5 6zM8 2.893C6.308 2.893 5 4.165 5 6s1.308 3.107 3 3.107S11 7.835 11 6S9.692 2.893 8 2.893zM8 7c-.553 0-1-.642-1-1s.447-1 1-1s1 .642 1 1s-.447 1-1 1z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p th:errors="*{motDePasse}" class="text-danger" th:if="${#fields.hasErrors('motDePasse')}"></p>
+                    </div>
+
+                    <div class="form-group mb-3 text-center">
+                        <button class="btn btn-primary zoom-button" type="submit" >Je crée mon compte</button>
+                    </div>
+
+
+
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<footer >
+    <div style="margin-left:70px" class="box-top">
+        <div class="container">
+            <i style="margin-top: 10px;" class="chat" onclick="window.location.href='tel:4747';"></i>
+            <a style="margin-top: 10px;" href="https://www.cihbank.ma/accueil" class="logo">
+                <img style="margin-top: 10px;"src="https://www.cihbank.ma/themes/ciht/images/logo-footer.png" alt="Cih Bank">
+            </a>
+            <div class="menu-footer">
+                <div class="col">
+                    <a href="#" class="title">CIH BANK</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.cihbank.ma/Groupe-CIHBANK">
+                                Groupe CIH BANK
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/espace-financier">
+                                Espace financier
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/actualites">
+                                Actualités
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/etre-contacter">
+                                Contactez-nous
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/communications">
+                                Communications
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://recrutement.cihbank.ma/" target="_blank">
+                                Recrutement
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <a href="#" class="title">Vous êtes ?</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/devenir-client/Offres-Packages">
+                                Particuliers
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/Professionnels/devenir-client/Offres-Packages">
+                                Professionnels
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/MDM/devenir-client/Offres-Packages">
+                                MDM
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/entreprise/">
+                                Entreprises
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <a href="#" class="title">Vos besoins</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.e-cihbank.ma/">
+                                Ouvrir un compte
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/nos-offres/financer-mes-projets">
+                                Crédit
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/nos-offres/Bancassurance-et-Assistance">
+                                Assurance
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/nos-offres/Epargner-et-Investir">
+                                Épargne
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <a href="#" class="title">Liens utiles</a>
+                    <ul>
+                        <li>
+                            <a href="https://www.cihnet.co.ma/" target="_blank">
+                                CIH Online
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.code30.ma/" target="_blank">
+                                Code 30
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/particuliers/devenir-client/code-18">
+                                Code18
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cihbank.ma/cartes" target="_blank">
+                                Avantages carte
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>
+                        Télécharger CIH mobile
+                    </h3>
+                    <a href="https://play.google.com/store/apps/details?id=com.b3g.cih.online" ></a>
+                    <a href="https://apps.apple.com/fr/app/cih-mobile/id664637221" ></a>
+                </div>
+            </div>
+            <p style="font-size: 11px;">
+                CIH BANK est assujetti à la loi N° 09-08, relative à la protection des personnes physiques à l'égard du traitement des données personnelles et elle a pris ses dispositions pour en respecter la lettre et l'esprit.
+            </p>
+        </div>
+    </div>
+</footer>
+<script>
+  // Sélectionnez l'élément contenant le formulaire
+  const formContainer = document.querySelector('.card-body');
+
+  // Sélectionnez l'élément alert-info
+  const successAlert = document.querySelector('.alert-info');
+
+  // Si l'alerte de succès est présente, masquez le formulaire
+  if (successAlert) {
+    formContainer.style.display = 'none';
+
+  }
+</script>
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("password");
+        const showPasswordButton = document.getElementById("showPasswordButton");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            showPasswordButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M13.146 3.146a.5.5 0 0 1 .708.708L9.5 8l4.354 4.146a.5.5 0 0 1-.708.708L8.5 8.707l-4.646 4.647a.5.5 0 0 1-.708-.708L7.793 8 3.147 3.354A.5.5 0 1 1 3.854 2.646L8.5 7.293l4.646-4.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>`;
+        } else {
+            passwordInput.type = "password";
+            showPasswordButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 12c-2.756 0-5-2.686-5-6s2.244-6 5-6s5 2.686 5 6s-2.244 6-5 6zM8 2.893C6.308 2.893 5 4.165 5 6s1.308 3.107 3 3.107S11 7.835 11 6S9.692 2.893 8 2.893zM8 7c-.553 0-1-.642-1-1s.447-1 1-1s1 .642 1 1s-.447 1-1 1z"/>
+                                </svg>`;
+        }
+    }
+</script>
+</body>
+</html>

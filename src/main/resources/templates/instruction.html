@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Dossier Instruction</title>
+  <style>
+    .hidden {
+      display: none;
+    }
+     #clientForm {
+      text-align: center;
+      margin-top:65px;
+    }
+#additionalFields button {
+background-color: #009EE0;
+      margin-bottom: 10px;
+      width: 100px;
+    height: 27px;
+    font-size: 15px;
+    border-color: #009EE0;
+}
+    #clientForm  button {
+      background-color: #009EE0;
+      margin-bottom: 10px;
+      width: 200px;
+      height: 50px;
+      font-size: 18px;
+      border-color: #009EE0;
+    }
+    #personalInfo {
+  text-align: center;
+}
+
+
+#personalInfo input[type="email"],
+#personalInfo input[type="text"] {
+  margin-bottom: 20px;
+
+}
+
+
+#personalInfo button {
+  margin-top: 20px;
+}
+  .explanation-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+  }
+  #suivant{
+   background-color: #009EE0;
+      margin-bottom: 10px;
+      width: 140px;
+      height: 50px;
+      border-color: #009EE0;
+      margin-left: -24px;
+  }
+   #documentFields {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  #documentFields label {
+    margin-bottom: 10px;
+  }
+
+  #documentFields input[type="file"] {
+    margin-bottom: 10px;
+  }
+   #documentFields .zoom-button {
+        display: block;
+        margin: 15px auto 0;
+    width: 163PX;
+
+        background-color: #E85412;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+  #documentFields .zoom-button {
+        transition: transform 0.3s ease;
+    }
+
+    #documentFields .zoom-button:hover {
+        transform: scale(1.1);
+        background-color:#0d6efd;
+    }
+    .explanation-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.explanation-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: blue;
+  color: white;
+  font-style: italic;
+  text-align: center;
+  line-height: 20px;
+}
+.form-row {
+    display: flex;
+    align-items: center;
+    width:381px;
+    margin-left: 500px;
+  }
+
+  .form-row label {
+    flex-basis: 150px;
+    text-align: left;
+  }
+
+  .form-row input[type="email"],
+  .form-row input[type="text"] {
+    flex: 1;
+    width: 200px;
+  }
+  .file-upload {
+    display: none; /* Hide the file input element */
+  }
+
+  .file-upload-label {
+    display: inline-block;
+    width: 350px;
+    margin-top: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .file-upload-label::before {
+    content: '\f019'; /* FontAwesome download icon */
+    font-family: FontAwesome;
+    font-size: 16px;
+    margin-right: 5px;
+  }
+   .documentFields {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .file-name-text {
+    margin-right: 10px;
+  }
+
+  .file-upload-label {
+    margin-bottom: 10px;
+    margin-right: 20px;
+  }
+.style-file{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .file-name-text {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .file-upload-label {
+    margin-bottom: 10px;
+  }
+.menu-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col {
+  flex: 1;
+}
+footer {
+  background-color: rgb(33,37,41);
+  color: white;
+    margin-top:200px;
+}
+
+.menu-footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.menu-footer a:hover {
+  text-decoration: underline;
+}
+.menu-footer ul {
+  list-style: none;
+}
+.menu-footer a,
+.menu-footer h3 {
+  font-size: 14px;
+}
+.logo img {
+  max-width: 100px;
+  height: auto;
+}
+.logo {
+  margin-bottom: 20px;
+}
+
+.menu-footer {
+  margin-top: 20px;
+}
+.credit_request{
+    margin-top: 20px;
+    width: 323px;
+    margin-top: 20px;
+    display: inline-block;
+    TEXT-ALIGN: LEFT;
+    margin-left: 122px;
+}
+.credit_response{
+    margin-top: 20px;
+    width: 154px;
+    margin-top: 20px;
+    display: inline-block;
+    TEXT-ALIGN: LEFT;
+    margin-left: 10px;
+}}
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<nav id="mainNav" class="navbar navbar-expand-lg navbar-light bg-beige">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnF2jg47kj8rVpfIMA-lL8MKmG0jL2sq9ahng5FFvtqw&s"
+           alt="Logo" width="100">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="/index">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="https://www.cihbank.ma/particuliers/nos-offres/financer-mes-projets">Nos produits</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/contact">Nous contacter</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            Espace Client
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/register">Création de compte</a></li>
+            <li><a class="dropdown-item" href="/login">Se connecter</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id="clientForm">
+  <p style="font-size: 24px;">Bonjour ! Êtes-vous un client de la banque CIH ?</p>
+  <form  method="post">
+    <button type="button" onclick="showForm()">Non</button>
+    <br>
+    <button type="button" onclick="showInstructionForm()">Oui</button>
+  </form>
+</div>
+<form id="instructionForm" th:action="@{/instruction}"  method="post" enctype="multipart/form-data">
+  <div id="personalInfo" class="hidden">
+    <p style="margin-bottom: 3rem">Bonjour, soumettez votre dossier de crédit en ligne en remplissant le formulaire suivant:</p>
+    <div class="form-row">
+      <label style="display: inline-block; width: 200px;margin-top:20px ;TEXT-ALIGN: LEFT;">Numéro de Téléphone:
+        <input id="telephone" name="telephone" style="width: 311px;" type="text"  required/>
+      </label><br/>
+      <span id="telephoneError" class="error-message"></span>
+    </div>
+    <div class="form-row">
+      <label style="text-align: left;">Radical:
+        <input id="radical" name="radical" style="width: 311px;" type="text"  required/>
+      </label>
+      <button type="button" class="explanation-button explanation-icon" onclick="toggleExplanation()">i</button><br>
+      <span id="radicalExplanation" style="display: none;">(Indicatif expliquant le radical)</span><br/>
+      <span id="radicalError" class="error-message"></span>
+    </div>
+
+    <button class="zoom-button" id="suivant" type="button" onclick="showAdditionalFields()">Suivant</button>
+  </div>
+
+  <div id="additionalFields" class="hidden" style="text-align: center;">
+    <label style="display: inline-block; width: 200px;margin-top:20px ;TEXT-ALIGN: LEFT;">Ville:
+      <input id="ville" name="ville" style="width: 311px;" type="text"  pattern="[A-Za-z]+" title="Veuillez entrer un nom de ville valide" required/>
+    </label><br/>
+
+    <label style="display: inline-block; width: 200px;margin-top: 20px ;TEXT-ALIGN: LEFT;">Code Postal:
+      <input id="codePostal" name="codePostal" style="width: 311px;" type="text"  required/>
+    </label><br/>
+
+    <label style="display: inline-block; width: 200px;margin-top: 20px ;TEXT-ALIGN: LEFT;">Email:
+      <input style="width: 311px;" type="email"  required/>
+    </label><br/>
+
+    <label style="display: inline-block; width: 200px;margin-top: 20px ;TEXT-ALIGN: LEFT;">Revenu Mensuel:
+      <input id="revenuMensuel" name="revenuMensuel" style="width: 311px;" type="text" required/>
+    </label><br/>
+
+
+    <div class="credit_request">
+      <label style="margin-top: 20px">Avez-vous un ou plusieurs crédits auprès d’un autre établissement de crédit en dehors de CIH Bank ?</label>
+    </div>
+    <br>
+    <div class="credit_response">
+      <input type="radio" name="credit" value="oui" onclick="showCreditAmountFields('oui')" required/> Oui
+    </div>
+    <input  type="radio" name="credit" value="non" onclick="hideCreditAmountFields()" required/> Non<br>
+
+    <div id="creditAmountField" class="hidden" style="margin-top: 20px;">
+      <label style="display: inline-block; width: 200px;margin-top: 0px ;TEXT-ALIGN: LEFT;">Montant du crédit:
+        <input name="credimontant" style="width: 311px;" type="text" value="0" />
+      </label><br/>
+
+      <button class="zoom-button" style="margin-top: 20px;margin-left:100px;" type="button" onclick="showDocumentFields()">Suivant</button>
+    </div>
+  </div>
+
+  <div id="documentFields" class="hidden">
+    <div class="style-file">
+      <p style="margin-bottom: 3rem;font-size:25px">Veuillez télécharger les documents suivants* :</p>
+      <span class="file-name-text">Attestation de salaire datant de moins de 30 jours :</span>
+      <label class="file-upload-label" id="attestation_salaire_label">
+        <input class="file-upload" type="file" name="attestation_salaire"  onchange="updateFileNameLabel(event, 'attestation_salaire_label')">
+        <span id="attestation_salaire_text">Télécharger</span>
+      </label><br/>
+      <span class="file-name-text">Bulletin de paie du mois dernier :</span>
+      <label class="file-upload-label" id="bulletin_paie_mois_dernier_label">
+        <input class="file-upload" type="file" name="bulletin_paie_mois_dernier" onchange="updateFileNameLabel(event, 'bulletin_paie_mois_dernier_label')">
+        <span id="bulletin_paie_mois_dernier_text">Télécharger</span>
+      </label><br/>
+      <span class="file-name-text">2ème Bulletin de paie du mois dernier :</span>
+      <label class="file-upload-label" id="deuxieme_bulletin_paie_mois_dernier_label">
+        <input class="file-upload" type="file" name="deuxieme_bulletin_paie_mois_dernier" onchange="updateFileNameLabel(event, 'deuxieme_bulletin_paie_mois_dernier_label')">
+        <span id="deuxieme_bulletin_paie_mois_dernier_text">Télécharger</span>
+      </label><br/>
+      <span class="file-name-text">CIN recto (phase avec photo) :</span>
+      <label class="file-upload-label" id="cin_recto_label">
+        <input class="file-upload" type="file" name="cin_recto" onchange="updateFileNameLabel(event, 'cin_recto_label')">
+        <span id="cin_recto_text">Télécharger</span>
+      </label><br/>
+      <span class="file-name-text">CIN verso (phase avec adresse) :</span>
+      <label class="file-upload-label" id="cin_verso_label">
+        <input class="file-upload" type="file" name="cin_verso" onchange="updateFileNameLabel(event, 'cin_verso_label')">
+        <span id="cin_verso_text">Télécharger</span>
+      </label><br/><br>
+      <p style="font-size: 8px">Le coût total du crédit est à titre indicatif et peut être ajusté selon votre demande <br>
+        **Sous réserve de conformité des documents scannés avec les originaux présentés en agence lors de la signature du contrat**</p>
+      <button class="zoom-button" onclick="envoie()" type="submit">Envoyer</button>
+    </div>
+  </div>
+</form>
+
+<footer >
+  <div style="margin-left:70px" class="box-top">
+    <div class="container">
+      <i style="margin-top: 10px;" class="chat" onclick="window.location.href='tel:4747';"></i>
+      <a style="margin-top: 10px;" href="https://www.cihbank.ma/accueil" class="logo">
+        <img style="margin-top: 10px;"src="https://www.cihbank.ma/themes/ciht/images/logo-footer.png" alt="Cih Bank">
+      </a>
+      <div class="menu-footer">
+        <div class="col">
+          <a href="#" class="title">CIH BANK</a>
+          <ul>
+            <li>
+              <a href="https://www.cihbank.ma/Groupe-CIHBANK">
+                Groupe CIH BANK
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/espace-financier">
+                Espace financier
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/actualites">
+                Actualités
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/etre-contacter">
+                Contactez-nous
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/communications">
+                Communications
+              </a>
+            </li>
+            <li>
+              <a href="https://recrutement.cihbank.ma/" target="_blank">
+                Recrutement
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <a href="#" class="title">Vous êtes ?</a>
+          <ul>
+            <li>
+              <a href="https://www.cihbank.ma/particuliers/devenir-client/Offres-Packages">
+                Particuliers
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/Professionnels/devenir-client/Offres-Packages">
+                Professionnels
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/MDM/devenir-client/Offres-Packages">
+                MDM
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/entreprise/">
+                Entreprises
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <a href="#" class="title">Vos besoins</a>
+          <ul>
+            <li>
+              <a href="https://www.e-cihbank.ma/">
+                Ouvrir un compte
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/particuliers/nos-offres/financer-mes-projets">
+                Crédit
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/particuliers/nos-offres/Bancassurance-et-Assistance">
+                Assurance
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/particuliers/nos-offres/Epargner-et-Investir">
+                Épargne
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <a href="#" class="title">Liens utiles</a>
+          <ul>
+            <li>
+              <a href="https://www.cihnet.co.ma/" target="_blank">
+                CIH Online
+              </a>
+            </li>
+            <li>
+              <a href="https://www.code30.ma/" target="_blank">
+                Code 30
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/particuliers/devenir-client/code-18">
+                Code18
+              </a>
+            </li>
+            <li>
+              <a href="https://www.cihbank.ma/cartes" target="_blank">
+                Avantages carte
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>
+            Télécharger CIH mobile
+          </h3>
+          <a href="https://play.google.com/store/apps/details?id=com.b3g.cih.online" ></a>
+          <a href="https://apps.apple.com/fr/app/cih-mobile/id664637221" ></a>
+        </div>
+      </div>
+      <p style="font-size: 11px;">
+        CIH BANK est assujetti à la loi N° 09-08, relative à la protection des personnes physiques à l'égard du traitement des données personnelles et elle a pris ses dispositions pour en respecter la lettre et l'esprit.
+      </p>
+    </div>
+  </div>
+</footer>
+<script >
+  function updateFileNameLabel(event, labelId) {
+    var fileInput = event.target;
+    var fileName = fileInput.files[0].name;
+    var label = document.getElementById(labelId);
+    var labelText = label.getElementsByTagName('span')[0];
+    labelText.innerHTML = fileName;
+  }
+</script>
+
+<script>
+
+//sauvegarde cache
+    function checkCache() {
+        if (localStorage.getItem("simulationData")){
+        var simulationdata=JSON.parse(localStorage.getItem("simulationData"));
+        var amount = simulationdata.montantDemande;
+        var duration = simulationdata.duree;
+        var emploie = simulationdata.emploi;
+        var monthlyPayment=simulationdata.mensualite;
+        var email=localStorage.getItem("email");
+
+        console.log(amount,duration,emploie,monthlyPayment,email);
+
+
+        } else {
+            console.log('API Cache non prise en charge par le navigateur.');
+        }
+    }
+    function envoie() {
+  if (localStorage.getItem("simulationData")) {
+    var simulationdata = JSON.parse(localStorage.getItem("simulationData"));
+    var amount = simulationdata.montantDemande;
+    var duration = simulationdata.duree;
+    var emploie = simulationdata.emploi;
+    var monthlyPayment = simulationdata.mensualite;
+    var email=localStorage.getItem("email");
+
+
+    // Créer les éléments input de type hidden
+    var amountInput = document.createElement("input");
+    amountInput.type = "hidden";
+    amountInput.name = "amount";
+    amountInput.value = amount;
+
+    var durationInput = document.createElement("input");
+    durationInput.type = "hidden";
+    durationInput.name = "duration";
+    durationInput.value = duration;
+
+    var emploieInput = document.createElement("input");
+    emploieInput.type = "hidden";
+    emploieInput.name = "emploie";
+    emploieInput.value = emploie;
+
+    var monthlyPaymentInput = document.createElement("input");
+    monthlyPaymentInput.type = "hidden";
+    monthlyPaymentInput.name = "monthlyPayment";
+    monthlyPaymentInput.value = monthlyPayment;
+
+    var email=document.createElement("input");
+    emailInput.type = "hidden";
+    emailInput.name = "email";
+    emailInput.value = email;
+
+
+    // Ajouter les éléments au formulaire
+    var form = document.getElementById("instructionForm");
+    form.appendChild(amountInput);
+    form.appendChild(durationInput);
+    form.appendChild(emploieInput);
+    form.appendChild(monthlyPaymentInput);
+    form.appendChild(email);
+
+    // Soumettre le formulaire
+    form.submit();
+  }
+}
+
+
+</script>
+<script>
+  function showForm() {
+    window.location.href = "https://www.cihnet.co.ma";
+  }
+
+  function showInstructionForm() {
+    document.getElementById("clientForm").classList.add("hidden");
+    document.getElementById("personalInfo").classList.remove("hidden");
+  }
+
+
+  function showAdditionalFields() {
+    document.getElementById("personalInfo").classList.add("hidden");
+    document.getElementById("additionalFields").classList.remove("hidden");
+  }
+  function showCreditAmountFields(response) {
+    if (response === 'oui') {
+      document.getElementById("creditAmountField").classList.remove("hidden");
+          document.getElementById("documentFields").classList.add("hidden");
+
+    } else {
+      document.getElementById("creditAmountField").classList.add("hidden");
+    }
+  }
+  function showCreditAmountFields(response) {
+  if (response === 'oui') {
+    document.getElementById("creditAmountField").classList.remove("hidden");
+    document.getElementById("documentFields").classList.add("hidden");
+  } else {
+    document.getElementById("creditAmountField").classList.add("hidden");
+    document.getElementById("documentFields").classList.remove("hidden");
+  }
+}
+
+function hideCreditAmountFields() {
+  // Hide additionalFields section
+  document.getElementById("additionalFields").classList.add("hidden");
+
+  // Hide creditAmountField section (optional, if needed)
+  document.getElementById("creditAmountField").classList.add("hidden");
+
+  // Show documentFields section
+  document.getElementById("documentFields").classList.remove("hidden");
+}
+
+function showDocumentFields() {
+  // Hide additionalFields section
+  document.getElementById("additionalFields").classList.add("hidden");
+
+  // Hide creditAmountField section (optional, if needed)
+  document.getElementById("creditAmountField").classList.add("hidden");
+
+  // Show documentFields section
+  document.getElementById("documentFields").classList.remove("hidden");
+}
+
+function toggleExplanation() {
+  var explanation = document.getElementById("radicalExplanation");
+  var radicalField = document.getElementById("radicalField");
+
+  if (explanation.style.display === "none") {
+    explanation.style.display = "inline";
+    radicalField.style.marginBottom = "0"; // Ajout de cette ligne pour ajuster le style
+  } else {
+    explanation.style.display = "none";
+    radicalField.style.marginBottom = "20px"; // Ajout de cette ligne pour ajuster le style
+  }
+}
+
+
+</script>
+
+
+</body>
+</html>

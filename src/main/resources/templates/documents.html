@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Documents</title>
+</head>
+<body>
+<h2>Documents</h2>
+<ul>
+  <!-- Parcourir la liste des documents -->
+  <c:forEach items="${documents}" var="document">
+    <li>
+      <a href="/download/${document.documentId}/${document.documentType}">
+        ${document.documentType}
+      </a>
+    </li>
+  </c:forEach>
+</ul>
+</body>
+</html>

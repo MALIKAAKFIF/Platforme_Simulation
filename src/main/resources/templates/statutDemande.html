@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Statut du dossier</title>
+</head>
+<body>
+<h1>Statut du dossier :</h1>
+<p>Statut : <span  th:text="${statut}"></span></p>
+
+<script>
+var socket = new WebSocket("ws://localhost:8080/dossier-status");
+
+socket.onmessage = function(event) {
+var message = event.data;
+// Mettez à jour l'interface utilisateur avec le message reçu
+console.log("Notification reçue : " + message);
+};
+
+socket.onclose = function(event) {
+// Gérez la fermeture de la connexion
+};
+</script>
+</body>
+</html>
